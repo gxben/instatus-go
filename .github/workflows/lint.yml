@@ -1,0 +1,11 @@
+name: Lint CI
+on:
+  pull_request:
+  push:
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: owo
+        run: echo "owo"
