@@ -1,3 +1,4 @@
+// 🪁 instatus-go: Lightweight and speedy Go client for Instatus
 // Copyright (c) 2022 Noel <cutie@floofy.dev>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,3 +20,42 @@
 // SOFTWARE.
 
 package instatus
+
+import "net/http"
+
+// OverrideOptionsFunc is a type to override the Options struct.
+type OverrideOptionsFunc func(o Options) Options
+
+// Options represents the instatus.Client options to use to customize
+// the HTTP client.
+type Options struct {
+	userAgent   string
+	accessToken string
+	httpClient  http.Client
+}
+
+// WithUserAgent overrides the default user agent when requests
+// are sent out.
+func WithUserAgent(agent string) OverrideOptionsFunc {
+	return func(o Options) Options {
+		o.userAgent = agent
+		return o
+	}
+}
+
+// WithToken overrides the access token, if no token is provided, then
+// the client will panic.
+func WithToken(token string) OverrideOptionsFunc {
+	return func(o Options) Options {
+		o.accessToken = token
+		return o
+	}
+}
+
+// WithHttpClient is the net/http client to use if you wish to extend it.
+func WithHttpClient(client http.Client) OverrideOptionsFunc {
+	return func(o Options) Options {
+		o.httpClient = client
+		return o
+	}
+}
