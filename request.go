@@ -126,7 +126,7 @@ func (c Client) PerformRequest(
 	}
 
 	// Try to convert it to JSON
-	if err := json.Unmarshal(b, &data); err != nil {
+	if err := json.Unmarshal(b, data); err != nil {
 		return err
 	} else {
 		return nil

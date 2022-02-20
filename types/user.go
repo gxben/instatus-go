@@ -19,54 +19,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Package instatus is the main package entrypoint for using `instatus-go`. To use it
-// in your application, you must initialize a new instatus.Client instance using the
-// instatus.NewClient func.
-package instatus
+package types
 
-import (
-	"errors"
-	"go.floofy.dev/instatus/types"
-	"net/http"
-)
-
-// Client is the main client to use to interact with the Instatus API.
-type Client struct {
-	options Options
-}
-
-// NewClient creates a new Client instance.
-func NewClient(opts ...OverrideOptionsFunc) Client {
-	options := Options{
-		httpClient:  http.Client{},
-		accessToken: "",
-		userAgent:   "auguwu/instatus-go",
-	}
-
-	for _, opt := range opts {
-		options = opt(options)
-	}
-
-	// TODO: should this be as a (*Client, error) return signature?
-	if options.accessToken == "" {
-		panic(errors.New("missing accessToken property in NewClient"))
-	}
-
-	return Client{
-		options: options,
-	}
-}
-
-func (c Client) User() (*types.User, error) {
-	var data *types.User
-	if err := c.PerformRequest(
-		"/user",
-		MethodGET,
-		data,
-		nil,
-	); err != nil {
-		return nil, err
-	} else {
-		return data, nil
-	}
+type User struct {
+	ID     string  `json:"id"`
+	Email  string  `json:"email"`
+	Name   string  `json:"name"`
+	Slug   string  `json:"slug"`
+	Avatar *string `json:"avatar"`
 }
