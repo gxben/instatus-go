@@ -9,7 +9,7 @@ but anyone can use this!
 To use the library, you can simply just `go get` it!
 
 ```shell
-$ go get go.floofy.dev/instatus
+$ go get github.com/gxben/instatus-go
 ```
 
 and now, you can start using it!
@@ -19,7 +19,7 @@ package main
 
 import (
 	"fmt"
-	"go.floofy.dev/instatus"
+	"github.com/gxben/instatus-go"
 )
 
 func main() {

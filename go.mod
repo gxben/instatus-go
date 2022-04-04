@@ -1,3 +1,3 @@
-module go.floofy.dev/instatus
+module github.com/gxben/instatus-go
 
 go 1.17

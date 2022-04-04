@@ -26,7 +26,7 @@ package instatus
 
 import (
 	"errors"
-	"go.floofy.dev/instatus/types"
+	"github.com/gxben/instatus-go/types"
 	"net/http"
 )
 
